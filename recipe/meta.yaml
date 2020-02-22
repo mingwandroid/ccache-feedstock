@@ -6,23 +6,25 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/ccache/ccache/releases/download/v{{ version }}/ccache-{{ version }}.tar.gz
-  sha256: 9b61f7fab2ec15305ee8382b03365503232dfb04b57414e7b0433768d530fa8a
+  url: https://github.com/ccache/ccache/releases/download/v{{ version }}/ccache-{{ version }}.tar.gz  # [not win]
+  sha256: 9b61f7fab2ec15305ee8382b03365503232dfb04b57414e7b0433768d530fa8a  # [not win]
+  git_url: https://github.com/cristianadam/ccache.git
+  git_tag: 1339172704b792e1a397ecfc8c5b937a0fae62e4
 
 build:
-  number: 1
-  skip: true  # [win]
+  number: 3
 
 requirements:
   build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
-    - make
+    - {{ compiler('c') }}  # [not win]
+    - {{ compiler('cxx') }}  # [not win]
+    - m2w64-toolchain        # [win]
+    - make  # [not win]
+    - cmake  # [win]
+    - ninja  # [win]
   host:
-    - zlib
-    - xz
-  run:
-    - zlib
+    - zlib  # [not win]
+    - xz  # [not win]
 
 test:
   commands:
@@ -47,3 +49,4 @@ extra:
   recipe-maintainers:
     - edisongustavo
     - marcelotrevisani
+    - mingwandroid
