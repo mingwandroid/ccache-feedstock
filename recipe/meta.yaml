@@ -22,6 +22,7 @@ requirements:
     - make  # [not win]
     - cmake  # [win]
     - ninja  # [win]
+    - git  # [win]
   host:
     - zlib  # [not win]
     - xz  # [not win]
